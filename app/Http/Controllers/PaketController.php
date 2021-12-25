@@ -62,9 +62,10 @@ class PaketController extends Controller
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function edit(Paket $paket)
+    public function edit($id)
     {
-        //
+        $paket = Paket::find($id);
+        return view('paket.edit', compact('paket'));
     }
 
     /**
@@ -74,9 +75,15 @@ class PaketController extends Controller
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Paket $paket)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Paket::findOrFail($id);
+        $data->nama = $request->nama;
+        $data->jam_berangkat = $request->jam_berangkat;
+        $data->jam_tiba = $request->jam_tiba;
+        $data->harga = $request->harga;
+        $data->save();
+        return redirect()->route('paket.index')->with('status', 'Berhasil mengubah paket');
     }
 
     /**
@@ -85,8 +92,10 @@ class PaketController extends Controller
      * @param  \App\Models\Paket  $paket
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Paket $paket)
+    public function destroy($id)
     {
-        //
+        $data = Paket::findOrFail($id);
+        $data->delete();
+        return redirect()->route('paket.index')->with('status', 'Berhasil menghapus paket')
     }
 }

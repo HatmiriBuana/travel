@@ -8,26 +8,33 @@ Tambah Customer
         <div class="col-lg-12">
             <div class="card shadow-sm">
                 <div class="card-body">
-                    <form action="{{route('customer.update', $customer->id)}}"  method="POST" enctype="multipart/form-data">
+                    <form action="{{route('paket.update', $paket->id)}}"  method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" value="PUT" name="_method">
                         <div class="form-group">
                             <label for="title">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{$customer->nama}}">
+                            <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{$paket->nama}}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="title">Alamat</label>
-                            <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{$customer->alamat}}">
+                            <label for="title">Jam Berangkat</label>
+                            <input type="datetime-local" name="jam_berangkat" id="jam_berangkat" class="form-control @error('jam_berangkat') is-invalid @enderror" value="{{$paket->jam_berangkat}}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="title">No Handphone</label>
-                            <input type="text" name="no_hp" id="no_hp" class="form-control @error('no_hp') is-invalid @enderror" value="{{$customer->no_telp}}">
+                            <label for="title">Jam Tiba</label>
+                            <input type="datetime-local" name="jam_tiba" id="jam_tiba" class="form-control @error('jam_tiba') is-invalid @enderror" value="{{$paket->jam_tiba}}">
+                            @error('title')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="title">Harga</label>
+                            <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" value="{{$paket->harga}}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
