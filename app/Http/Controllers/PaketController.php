@@ -96,6 +96,6 @@ class PaketController extends Controller
     {
         $data = Paket::findOrFail($id);
         $data->delete();
-        return redirect()->route('paket.index')->with('status', 'Berhasil menghapus paket')
+        return redirect()->route('paket.index')->with('status', 'Berhasil menghapus paket');
     }
 }

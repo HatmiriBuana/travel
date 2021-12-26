@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Transaksi;
 class Customer extends Model
 {
     use HasFactory;
@@ -15,4 +15,10 @@ class Customer extends Model
         'alamat',
         'no_telp',
     ];
+
+    // relasi one to many on transaksi
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class, 'customer_id');
+    }
 }

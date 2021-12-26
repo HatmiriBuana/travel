@@ -16,8 +16,8 @@ class CreateTabelPaket extends Migration
         Schema::create('tabel_paket', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->datetime('jam_berangkat');
-            $table->datetime('jam_tiba');
+            $table->time('jam_berangkat');
+            $table->time('jam_tiba');
             $table->integer('harga');
             $table->timestamps();
         });

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('title')
-Tambah Customer
+Edit Paket
 @endsection
 @section('content')
 <div class="container">
@@ -20,14 +20,14 @@ Tambah Customer
                         </div>
                         <div class="form-group">
                             <label for="title">Jam Berangkat</label>
-                            <input type="datetime-local" name="jam_berangkat" id="jam_berangkat" class="form-control @error('jam_berangkat') is-invalid @enderror" value="{{$paket->jam_berangkat}}">
+                            <input type="time" name="jam_berangkat" id="jam_berangkat" class="form-control @error('jam_berangkat') is-invalid @enderror" value="{{$paket->jam_berangkat}}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="title">Jam Tiba</label>
-                            <input type="datetime-local" name="jam_tiba" id="jam_tiba" class="form-control @error('jam_tiba') is-invalid @enderror" value="{{$paket->jam_tiba}}">
+                            <input type="time" name="jam_tiba" id="jam_tiba" class="form-control @error('jam_tiba') is-invalid @enderror" value="{{$paket->jam_tiba}}">
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

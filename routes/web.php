@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PaketController;
 use App\Http\Controllers\TransaksiController;
-use App\Http\Controllers\DetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,4 +29,3 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('customer', CustomerController::class);
 Route::resource('paket', PaketController::class);
 Route::resource('transaksi', TransaksiController::class);
-Route::resource('detail-transaksi', DetailController::class);

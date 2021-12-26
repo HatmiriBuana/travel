@@ -19,14 +19,14 @@ Tambah Paket
                         </div>
                         <div class="form-group">
                             <label for="title">Jam Berangkat</label>
-                            <input type="datetime-local" name="jam_berangkat" id="jam_berangkat" class="form-control @error('jam_berangkat') is-invalid @enderror" >
+                            <input type="time" name="jam_berangkat" id="jam_berangkat" class="form-control @error('jam_berangkat') is-invalid @enderror" >
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
                         <div class="form-group">
                             <label for="title">Jam Tiba</label>
-                            <input type="datetime-local" name="jam_tiba" id="jam_tiba" class="form-control @error('jam_tiba') is-invalid @enderror" >
+                            <input type="time" name="jam_tiba" id="jam_tiba" class="form-control @error('jam_tiba') is-invalid @enderror" >
                             @error('title')
                                 <small class="text-danger">{{ $message }}</small>
                             @enderror

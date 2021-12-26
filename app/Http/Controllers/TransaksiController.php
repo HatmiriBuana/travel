@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\Customer;
+use App\Models\Paket;
 use Illuminate\Http\Request;
 
 class TransaksiController extends Controller
@@ -14,7 +16,8 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-        
+        $transaksi = Transaksi::with(['customer', 'paket'])->get();
+        return view('transaksi.index', compact('transaksi'));
     }
 
     /**
@@ -24,7 +27,9 @@ class TransaksiController extends Controller
      */
     public function create()
     {
-        //
+        $customer = Customer::all();
+        $paket = Paket::all();
+        return view('transaksi.create', compact('customer', 'paket'));
     }
 
     /**
@@ -35,7 +40,21 @@ class TransaksiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new \App\Models\Transaksi;
+        $data->transportasi = $request->transportasi;
+        $data->tujuan_wisata = $request->tujuan_wisata;
+        $data->jumlah = $request->jumlah;
+        $data->tgl_berangkat = $request->tanggal_berangkat;
+        $data->tgl_transaksi = $request->tanggal_transaksi;
+
+        // findOrFail paket by id
+        $paket = Paket::findOrFail($request->paket_id);
+        $data->total = $paket->harga * $data->jumlah;
+
+        $data->paket_id = $request->paket_id;
+        $data->customer_id = $request->customer_id;
+        $data->save();
+        return redirect()->route('transaksi.index')->with('status', 'Berhasil menabah transaksi');   
     }
 
     /**
@@ -55,9 +74,12 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaksi $transaksi)
+    public function edit($id)
     {
-        //
+        $transaksi = Transaksi::where('id', $id)->with(['customer', 'paket'])->first();
+        $customer = Customer::all();
+        $paket = Paket::all();
+        return view('transaksi.edit', compact('transaksi', 'customer', 'paket'));
     }
 
     /**
@@ -67,9 +89,23 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaksi $transaksi)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Transaksi::findOrFail($id);
+        $data->transportasi = $request->transportasi;
+        $data->tujuan_wisata = $request->tujuan_wisata;
+        $data->jumlah = $request->jumlah;
+        $data->tgl_berangkat = $request->tgl_berangkat;
+        $data->tgl_transaksi = $request->tgl_transaksi;
+
+        // findOrFail paket by id
+        $paket = Paket::findOrFail($request->paket_id);
+        $data->total = $paket->harga * $data->jumlah;
+
+        $data->paket_id = $request->paket_id;
+        $data->customer_id = $request->customer_id;
+        $data->save();
+        return redirect()->route('transaksi.index')->with('status', 'Berhasil mengedit transaksi');
     }
 
     /**
@@ -78,8 +114,10 @@ class TransaksiController extends Controller
      * @param  \App\Models\Transaksi  $transaksi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaksi $transaksi)
+    public function destroy($id)
     {
-        //
+        $data = Transaksi::findOrFail($id);
+        $data->delete();
+        return redirect()->route('transaksi.index')->with('status', 'Berhasil menghapus transaksi');
     }
 }

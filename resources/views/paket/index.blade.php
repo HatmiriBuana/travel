@@ -41,7 +41,7 @@ Paket
                                     <td>{{$data->nama}}</td>
                                     <td>{{$data->jam_berangkat}}</td>
                                     <td>{{$data->jam_tiba}}</td>
-                                    <td>{{$data->harga}}</td>
+                                    <td>Rp. {{number_format($data->harga,0,',','.')}}</td>
                                     <td>
                                         <a class="btn btn-success" href="{{route('paket.edit', $data->id)}}">edit</a>
                                         <form onsubmit="return confirm('Aakah anda yakin ingin menghapus?')" class="d-inline" action="{{route('paket.destroy', $data->id)}}" method="POST">

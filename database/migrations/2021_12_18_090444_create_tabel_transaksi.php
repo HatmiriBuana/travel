@@ -15,9 +15,12 @@ class CreateTabelTransaksi extends Migration
     {
         Schema::create('tabel_transaksi', function (Blueprint $table) {
             $table->id();
-            $table->datetime('tgl_transaksi');
+            $table->string('transportasi');
+            $table->string('tujuan_wisata');
+            $table->integer('jumlah');
+            $table->date('tgl_berangkat');
+            $table->date('tgl_transaksi');
             $table->integer('total');
-            $table->timestamps();
         });
     }
 

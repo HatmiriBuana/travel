@@ -28,23 +28,36 @@ Transaksi
                         <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                             <thead>
                                 <tr role="row">
-                                    <th>Nama</th>
-                                    <th>Jam Berangkat</th>
-                                    <th>Jam Tiba</th>
+                                    <th>Customer</th>
+                                    <th>Trasportasi</th>
+                                    <th>Tujuan Wisata</th>
+                                    {{-- <th>Tanggal Transaksi</th> --}}
+                                    <th>Tanggal Berangkat</th>
+                                    <th>Berangkat</th>
+                                    <th>Tiba</th>
+                                    <th>Jumlah</th>
                                     <th>Harga</th>
+                                    <th>Total</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($paket as $data)
+                                @foreach($transaksi as $data)
                                 <tr>
-                                    <td>{{$data->nama}}</td>
-                                    <td>{{$data->jam_berangkat}}</td>
-                                    <td>{{$data->jam_tiba}}</td>
-                                    <td>{{$data->harga}}</td>
+                                    <td>{{$data->customer->nama}}</td>
+                                    <td>{{$data->transportasi}}</td>
+                                    <td>{{$data->tujuan_wisata}}</td>
+                                    {{-- <td>{{$data->tgl_transaksi}}</td> --}}
+                                    <td>{{$data->tgl_berangkat}}</td>
+                                    <td>{{$data->paket->jam_berangkat}}</td>
+                                    <td>{{$data->paket->jam_tiba}}</td>
+                                    <td>{{$data->jumlah}}</td>
+                                    <td>Rp. {{number_format($data->paket->harga,2,',','.')}}</td>
+                                    <td>Rp. {{number_format($data->total,2,',','.')}}</td>
                                     <td>
-                                        <a class="btn btn-success" href="{{route('paket.edit', $data->id)}}">edit</a>
-                                        <form onsubmit="return confirm('Aakah anda yakin ingin menghapus?')" class="d-inline" action="{{route('paket.destroy', $data->id)}}" method="POST">
+                                        {{-- {{dd($data->id)}} --}}
+                                        <a class="btn btn-success" href="{{route('transaksi.edit', $data->id)}}">edit</a>
+                                        <form onsubmit="return confirm('Aakah anda yakin ingin menghapus?')" class="d-inline" action="{{route('transaksi.destroy', $data->id)}}" method="POST">
                                             @csrf
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="submit" value="Delete" class="btn btn-danger">
